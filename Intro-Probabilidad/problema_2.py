@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
 
 def plot_boundaries(X_train, X_test, y_train, y_test, score, probability_func, h = .02, ax = None):
     X = np.vstack((X_test, X_train))
@@ -41,26 +43,34 @@ def plot_boundaries(X_train, X_test, y_train, y_test, score, probability_func, h
     ax.text(xx.max() - .3, yy.min() + .3, ('%.2f' % score).lstrip('0'),
             size=40, horizontalalignment='right')
 
-    
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
+    plt.show()
 
-''' 
-Utilizando las siguientes funciones/paquetes resolver los siguientes problemas de clasificación en **problema_2.py**:
-
-**genfromtxt** de **numpy** para leer los dos datasets:
-- ./datasets/student_admission.txt
-- ./datasets/chip_tests.txt
-
-**train_test_split** de **sklearn** para dividir entre test set y train set. Recomendamos un 40% de datos para test set
-
-**GaussianNB** de **sklearn** como modelo de ML.
-
-Y la función **plot_boundaries(X_train, X_test, y_train, y_test, score, predict_proba, ax=ax, h=h)** incluida en problema_2.py para graficar los resultados. X_train es un np.array con los features de entrada, y_train es la etiqueta. Lo mismo con X_test e y_test, Score es el 'accuracy' del modelo, predict_proba es la función que dada una entrada de la probabilidad de clasificar correcto y h es el paso para la grafica del 'boundary' 
-'''
 
 def train_and_plot(X, y, h=1):
-    # TODO
-    return
-    
+    # separo en dos sets, uno para entrenamiento y otro para prueba
+	X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.4, random_state=42)
 
+	gnb = GaussianNB()
+	gnb.fit(X_train, y_train)
+
+	score_train = gnb.score(X_train, y_train)
+
+	plot_boundaries(X_train = X_train, X_test = X_test, y_train = y_train, y_test = y_test, score = score_train, probability_func = gnb.predict_proba)
+
+	return
+
+
+########
+# MAIN #
+########
+
+# datos de entrada
+problema1 = 'datasets\student_admission.txt'
+problema2 = 'datasets\chip_tests.txt'
+
+data = np.genfromtxt(fname=problema2, delimiter=",")
+
+y = data[:, -1] # Última columna --> Label
+x = data[:, :-1] # Primeras dos columnas --> Features
+
+train_and_plot(x,y)
