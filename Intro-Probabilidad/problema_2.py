@@ -49,7 +49,7 @@ def plot_boundaries(X_train, X_test, y_train, y_test, score, probability_func, h
 def train_and_plot(X, y, h=1):
     # separo en dos sets, uno para entrenamiento y otro para prueba
 	X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.4, random_state=42)
-
+	# declaro y entreno el modelo
 	gnb = GaussianNB()
 	gnb.fit(X_train, y_train)
 
@@ -65,10 +65,10 @@ def train_and_plot(X, y, h=1):
 ########
 
 # datos de entrada
-problema1 = 'datasets\student_admission.txt'
-problema2 = 'datasets\chip_tests.txt'
+set1 = 'datasets\student_admission.txt'
+set2 = 'datasets\chip_tests.txt'
 
-data = np.genfromtxt(fname=problema2, delimiter=",")
+data = np.genfromtxt(fname=set1, delimiter=",")
 
 y = data[:, -1] # Última columna --> Label
 x = data[:, :-1] # Primeras dos columnas --> Features
