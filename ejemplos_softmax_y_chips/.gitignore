@@ -1,0 +1,7 @@
+.ipynb_checkpoints/
+__pycache__/
+checkpoints/
+images/
+checkpoints_softmax/
+images_softmax/
+checkpoints_interesante/.DS_Store
