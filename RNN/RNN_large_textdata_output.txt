@@ -1,8 +1,0 @@
--------------------
-input chars = 
-IOS Y TRADUCCIONES
-I. EL HIJO DEL VAMPIRO
-PROBABLEMENTE todos los fantasmas sabían que Duggu Van
-era"
-predicted chars = 
- una cara de la cara de la cara de la cara de la cara de la cara de la cara de la cara de la cara de"
